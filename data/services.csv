@@ -1,0 +1,4 @@
+service_ref,service_type,valid_from,valid_to,description
+S-1,group_course,2025-12-01,2026-02-01,家庭沟通课程
+S-1,group_course,2026-02-02,,课程修订版
+S-2,individual_guidance,2025-12-01,,个别指导

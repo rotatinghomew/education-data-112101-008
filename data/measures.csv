@@ -1,0 +1,4 @@
+measure_ref,instrument_ref,version,construct,valid_from,valid_to
+M-1,I-1,1,family_confidence,2025-01-01,2026-02-01
+M-2,I-1,2,family_confidence,2026-02-02,
+M-3,I-2,1,course_satisfaction,2025-01-01,

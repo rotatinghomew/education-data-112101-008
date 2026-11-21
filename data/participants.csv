@@ -1,0 +1,4 @@
+participant_ref,service_ref,enrolled_at,referral_type,baseline_band,participation_state
+P-1,S-1,2026-01-01,self,high_need,completed
+P-2,S-2,2026-01-03,referral,medium_need,partial
+P-3,S-1,2026-01-04,self,low_need,withdrawn
