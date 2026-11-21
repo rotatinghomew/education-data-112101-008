@@ -1,0 +1,1738 @@
+{
+  "rules": [
+    "可用观测值：response_state=answered 且 value 可解析为数值；其余记录保留在审计清单，不计入变化计算。",
+    "配对：同一家庭、同一构念下，取最早与最晚的可用观测；变化 = 随访值 − 基线值。",
+    "分母：分层内全部报名家庭；未完成随访者保留在分母并单列去向，不从分母剔除。",
+    "量表版本：观测日期须落在量表有效期窗内，否则标记“窗外”；基线与随访使用不同版本标记“跨版本”。",
+    "服务归属：报名日期落入服务记录有效期窗，确定该家庭对应的服务记录版本。",
+    "行政随访状态：同一家庭有多条随访记录时，按到期日最新的一条计；全部记录条数另列。",
+    "不确定度：均值变化 ±1.96×标准误（正态近似）；配对数 <2 记为“样本不足”。",
+    "敏感性边界：对“有基线、缺随访”的家庭，以该构念观测到的最小/最大值推算最佳与最差情形均值；边界不是插补。",
+    "被取代（supersedes 指向）的观测不参与当前分析，仅保留在审计清单。"
+  ],
+  "constructs": [
+    "family_confidence",
+    "course_satisfaction"
+  ],
+  "scale_range": {
+    "family_confidence": [
+      1.0,
+      5.0
+    ]
+  },
+  "n_participants": 35,
+  "n_observations_current": 68,
+  "n_observations_superseded": 0,
+  "superseded_refs": [],
+  "composition": {
+    "by_service": {
+      "S-1": 18,
+      "S-2": 17
+    },
+    "by_referral": {
+      "referral": 12,
+      "school": 11,
+      "self": 12
+    },
+    "by_baseline_band": {
+      "high_need": 11,
+      "low_need": 12,
+      "medium_need": 12
+    },
+    "by_participation_state": {
+      "completed": 11,
+      "partial": 12,
+      "withdrawn": 12
+    }
+  },
+  "strata": [
+    {
+      "key": "S-1|high_need|completed|course_satisfaction",
+      "service_ref": "S-1",
+      "baseline_band": "high_need",
+      "participation_state": "completed",
+      "construct": "course_satisfaction",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 6
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 6,
+        "overdue": 0,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-1",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-6",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-12",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-18",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-24",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-30",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-1|high_need|completed|family_confidence",
+      "service_ref": "S-1",
+      "baseline_band": "high_need",
+      "participation_state": "completed",
+      "construct": "family_confidence",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 1,
+        "followup_missing": 3,
+        "single_observation": 2,
+        "no_usable_observation": 0,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 1,
+        "mean_change": 1.0,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 1,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 3,
+        "best_mean_change": 2.25,
+        "worst_mean_change": -0.75,
+        "n_unbounded": 2
+      },
+      "followup_admin": {
+        "complete": 6,
+        "overdue": 0,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-1",
+          "referral_type": "self",
+          "disposition": "paired",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-01",
+            "value": 3.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-2",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-01",
+            "value": 4.0,
+            "in_window": true
+          },
+          "change": 1.0,
+          "same_version": false,
+          "out_of_window": false
+        },
+        {
+          "participant_ref": "P-6",
+          "referral_type": "self",
+          "disposition": "followup_missing",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-6-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-07",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-12",
+          "referral_type": "self",
+          "disposition": "single_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-12-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-13",
+            "value": 5.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-18",
+          "referral_type": "self",
+          "disposition": "followup_missing",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-18-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-19",
+            "value": 4.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-24",
+          "referral_type": "self",
+          "disposition": "single_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-24-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-25",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-30",
+          "referral_type": "self",
+          "disposition": "followup_missing",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-30-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-04",
+            "value": 1.0,
+            "in_window": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "S-1|low_need|withdrawn|course_satisfaction",
+      "service_ref": "S-1",
+      "baseline_band": "low_need",
+      "participation_state": "withdrawn",
+      "construct": "course_satisfaction",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 6
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 0,
+        "withdrawn": 6,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-3",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-8",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-14",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-20",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-26",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-32",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-1|low_need|withdrawn|family_confidence",
+      "service_ref": "S-1",
+      "baseline_band": "low_need",
+      "participation_state": "withdrawn",
+      "construct": "family_confidence",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 2,
+        "single_observation": 3,
+        "no_usable_observation": 1,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 2,
+        "best_mean_change": 1.5,
+        "worst_mean_change": -2.5,
+        "n_unbounded": 4
+      },
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 0,
+        "withdrawn": 6,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-3",
+          "referral_type": "self",
+          "disposition": "single_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-4",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-01",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-8",
+          "referral_type": "school",
+          "disposition": "single_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-8-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-09",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-14",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-14-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-15",
+            "value": 5.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-20",
+          "referral_type": "school",
+          "disposition": "no_usable_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-26",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-26-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-27",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-32",
+          "referral_type": "school",
+          "disposition": "single_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-32-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-06",
+            "value": 5.0,
+            "in_window": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "S-1|medium_need|partial|course_satisfaction",
+      "service_ref": "S-1",
+      "baseline_band": "medium_need",
+      "participation_state": "partial",
+      "construct": "course_satisfaction",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 6
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 6,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-4",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-10",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-16",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-22",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-28",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-34",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-1|medium_need|partial|family_confidence",
+      "service_ref": "S-1",
+      "baseline_band": "medium_need",
+      "participation_state": "partial",
+      "construct": "family_confidence",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 3,
+        "single_observation": 3,
+        "no_usable_observation": 0,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 3,
+        "best_mean_change": 2.0,
+        "worst_mean_change": -2.0,
+        "n_unbounded": 3
+      },
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 6,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-4",
+          "referral_type": "referral",
+          "disposition": "single_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-4-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-05",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-10",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-10-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-11",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-16",
+          "referral_type": "referral",
+          "disposition": "single_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-16-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-17",
+            "value": 4.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-22",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-22-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-23",
+            "value": 3.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-28",
+          "referral_type": "referral",
+          "disposition": "single_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "single": {
+            "observation_ref": "O-28-1",
+            "measure_ref": "M-2",
+            "instrument_ref": "I-1",
+            "measure_version": "2",
+            "observed_at": "2026-03-02",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-34",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-34-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-08",
+            "value": 5.0,
+            "in_window": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "S-2|high_need|completed|course_satisfaction",
+      "service_ref": "S-2",
+      "baseline_band": "high_need",
+      "participation_state": "completed",
+      "construct": "course_satisfaction",
+      "n_enrolled": 5,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 5
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 5,
+        "overdue": 0,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-9",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-15",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-21",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-27",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-33",
+          "referral_type": "self",
+          "disposition": "no_observation",
+          "followup_admin_state": "complete",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-2|high_need|completed|family_confidence",
+      "service_ref": "S-2",
+      "baseline_band": "high_need",
+      "participation_state": "completed",
+      "construct": "family_confidence",
+      "n_enrolled": 5,
+      "dispositions": {
+        "paired": 3,
+        "followup_missing": 2,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 3,
+        "mean_change": -1.333,
+        "sd": 2.887,
+        "ci_lo": -4.6,
+        "ci_hi": 1.933,
+        "reading": "spans_zero",
+        "version_mix": {
+          "same_version": 3,
+          "cross_version": 0,
+          "out_of_window": 3
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 2,
+        "best_mean_change": 0.4,
+        "worst_mean_change": -1.2,
+        "n_unbounded": 0
+      },
+      "followup_admin": {
+        "complete": 5,
+        "overdue": 0,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-9",
+          "referral_type": "self",
+          "disposition": "paired",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-9-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-10",
+            "value": 5.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-9-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-10",
+            "value": 2.0,
+            "in_window": false
+          },
+          "change": -3.0,
+          "same_version": true,
+          "out_of_window": true
+        },
+        {
+          "participant_ref": "P-15",
+          "referral_type": "self",
+          "disposition": "followup_missing",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-15-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-16",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-21",
+          "referral_type": "self",
+          "disposition": "paired",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-21-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-22",
+            "value": 2.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-21-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-22",
+            "value": 4.0,
+            "in_window": false
+          },
+          "change": 2.0,
+          "same_version": true,
+          "out_of_window": true
+        },
+        {
+          "participant_ref": "P-27",
+          "referral_type": "self",
+          "disposition": "followup_missing",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-27-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-01",
+            "value": 3.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-33",
+          "referral_type": "self",
+          "disposition": "paired",
+          "followup_admin_state": "complete",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-33-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-07",
+            "value": 4.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-33-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-07",
+            "value": 1.0,
+            "in_window": false
+          },
+          "change": -3.0,
+          "same_version": true,
+          "out_of_window": true
+        }
+      ]
+    },
+    {
+      "key": "S-2|low_need|withdrawn|course_satisfaction",
+      "service_ref": "S-2",
+      "baseline_band": "low_need",
+      "participation_state": "withdrawn",
+      "construct": "course_satisfaction",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 6
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 0,
+        "withdrawn": 6,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-5",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-11",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-17",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-23",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-29",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-35",
+          "referral_type": "school",
+          "disposition": "no_observation",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-2|low_need|withdrawn|family_confidence",
+      "service_ref": "S-2",
+      "baseline_band": "low_need",
+      "participation_state": "withdrawn",
+      "construct": "family_confidence",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 2,
+        "followup_missing": 4,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 2,
+        "mean_change": -0.5,
+        "sd": 3.536,
+        "ci_lo": -5.4,
+        "ci_hi": 4.4,
+        "reading": "spans_zero",
+        "version_mix": {
+          "same_version": 2,
+          "cross_version": 0,
+          "out_of_window": 2
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 4,
+        "best_mean_change": 1.833,
+        "worst_mean_change": -0.833,
+        "n_unbounded": 0
+      },
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 0,
+        "withdrawn": 6,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-5",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-5-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-06",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-11",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-11-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-12",
+            "value": 2.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-17",
+          "referral_type": "school",
+          "disposition": "paired",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-17-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-18",
+            "value": 3.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-17-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-18",
+            "value": 5.0,
+            "in_window": false
+          },
+          "change": 2.0,
+          "same_version": true,
+          "out_of_window": true
+        },
+        {
+          "participant_ref": "P-23",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-23-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-24",
+            "value": 4.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-29",
+          "referral_type": "school",
+          "disposition": "paired",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-29-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-03",
+            "value": 5.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-29-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-03",
+            "value": 2.0,
+            "in_window": false
+          },
+          "change": -3.0,
+          "same_version": true,
+          "out_of_window": true
+        },
+        {
+          "participant_ref": "P-35",
+          "referral_type": "school",
+          "disposition": "followup_missing",
+          "followup_admin_state": "withdrawn",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-35-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-09",
+            "value": 1.0,
+            "in_window": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "S-2|medium_need|partial|course_satisfaction",
+      "service_ref": "S-2",
+      "baseline_band": "medium_need",
+      "participation_state": "partial",
+      "construct": "course_satisfaction",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 0,
+        "followup_missing": 0,
+        "single_observation": 0,
+        "no_usable_observation": 0,
+        "no_observation": 6
+      },
+      "paired": {
+        "n": 0,
+        "mean_change": null,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 0,
+          "cross_version": 0,
+          "out_of_window": 0
+        }
+      },
+      "sensitivity": null,
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 6,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-2",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-7",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-13",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-19",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-25",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-31",
+          "referral_type": "referral",
+          "disposition": "no_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "S-2|medium_need|partial|family_confidence",
+      "service_ref": "S-2",
+      "baseline_band": "medium_need",
+      "participation_state": "partial",
+      "construct": "family_confidence",
+      "n_enrolled": 6,
+      "dispositions": {
+        "paired": 1,
+        "followup_missing": 4,
+        "single_observation": 0,
+        "no_usable_observation": 1,
+        "no_observation": 0
+      },
+      "paired": {
+        "n": 1,
+        "mean_change": -3.0,
+        "sd": null,
+        "ci_lo": null,
+        "ci_hi": null,
+        "reading": "insufficient",
+        "version_mix": {
+          "same_version": 1,
+          "cross_version": 0,
+          "out_of_window": 1
+        }
+      },
+      "sensitivity": {
+        "n_bounded": 4,
+        "best_mean_change": 1.2,
+        "worst_mean_change": -2.0,
+        "n_unbounded": 1
+      },
+      "followup_admin": {
+        "complete": 0,
+        "overdue": 6,
+        "withdrawn": 0,
+        "no_record": 0
+      },
+      "members": [
+        {
+          "participant_ref": "P-2",
+          "referral_type": "referral",
+          "disposition": "no_usable_observation",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1
+        },
+        {
+          "participant_ref": "P-7",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-7-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-08",
+            "value": 3.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-13",
+          "referral_type": "referral",
+          "disposition": "paired",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-13-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-14",
+            "value": 4.0,
+            "in_window": true
+          },
+          "followup": {
+            "observation_ref": "O-13-1",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-03-14",
+            "value": 1.0,
+            "in_window": false
+          },
+          "change": -3.0,
+          "same_version": true,
+          "out_of_window": true
+        },
+        {
+          "participant_ref": "P-19",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-19-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-20",
+            "value": 5.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-25",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-25-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-26",
+            "value": 1.0,
+            "in_window": true
+          }
+        },
+        {
+          "participant_ref": "P-31",
+          "referral_type": "referral",
+          "disposition": "followup_missing",
+          "followup_admin_state": "overdue",
+          "followup_rows": 1,
+          "baseline": {
+            "observation_ref": "O-31-0",
+            "measure_ref": "M-1",
+            "instrument_ref": "I-1",
+            "measure_version": "1",
+            "observed_at": "2026-01-05",
+            "value": 2.0,
+            "in_window": true
+          }
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-4-0",
+      "detail": "response_state=missing 但 value=5，按口径不计入变化"
+    },
+    {
+      "type": "obs_answered_without_value",
+      "ref": "O-5-1",
+      "detail": "response_state=answered 但 value 为空，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-5-1",
+      "detail": "观测日期 2026-03-06 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-6-1",
+      "detail": "response_state=missing 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-7-1",
+      "detail": "response_state=withdrawn 但 value=5，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-7-1",
+      "detail": "观测日期 2026-03-08 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-8-0",
+      "detail": "response_state=missing 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-9-1",
+      "detail": "观测日期 2026-03-10 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-11-1",
+      "detail": "response_state=withdrawn 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-11-1",
+      "detail": "观测日期 2026-03-12 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-12-0",
+      "detail": "response_state=missing 但 value=3，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-13-1",
+      "detail": "观测日期 2026-03-14 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-14-1",
+      "detail": "response_state=missing 但 value=2，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-15-1",
+      "detail": "观测日期 2026-03-16 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-16-0",
+      "detail": "response_state=missing 但 value=2，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-17-1",
+      "detail": "观测日期 2026-03-18 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-18-1",
+      "detail": "response_state=missing 但 value=1，按口径不计入变化"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-19-1",
+      "detail": "response_state=withdrawn 但 value=2，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-19-1",
+      "detail": "观测日期 2026-03-20 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-20-0",
+      "detail": "response_state=missing 但 value=1，按口径不计入变化"
+    },
+    {
+      "type": "obs_answered_without_value",
+      "ref": "O-20-1",
+      "detail": "response_state=answered 但 value 为空，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-21-1",
+      "detail": "观测日期 2026-03-22 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-22-1",
+      "detail": "response_state=missing 但 value=5，按口径不计入变化"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-23-1",
+      "detail": "response_state=withdrawn 但 value=1，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-23-1",
+      "detail": "观测日期 2026-03-24 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-24-0",
+      "detail": "response_state=missing 但 value=5，按口径不计入变化"
+    },
+    {
+      "type": "obs_answered_without_value",
+      "ref": "O-25-1",
+      "detail": "response_state=answered 但 value 为空，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-25-1",
+      "detail": "观测日期 2026-03-26 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-26-1",
+      "detail": "response_state=missing 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-27-1",
+      "detail": "response_state=withdrawn 但 value=5，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-27-1",
+      "detail": "观测日期 2026-03-01 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-28-0",
+      "detail": "response_state=missing 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-29-1",
+      "detail": "观测日期 2026-03-03 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-31-1",
+      "detail": "response_state=withdrawn 但 value=4，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-31-1",
+      "detail": "观测日期 2026-03-05 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-32-0",
+      "detail": "response_state=missing 但 value=3，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-33-1",
+      "detail": "观测日期 2026-03-07 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "obs_value_without_answered_state",
+      "ref": "O-34-1",
+      "detail": "response_state=missing 但 value=2，按口径不计入变化"
+    },
+    {
+      "type": "obs_out_of_window",
+      "ref": "O-35-1",
+      "detail": "观测日期 2026-03-09 不在量表 M-1（I-1 v1）有效期 2025-01-01~2026-02-01 内"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-5",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-07"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-7",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-09"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-10",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-12"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-11",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-13"
+    },
+    {
+      "type": "followup_complete_without_date",
+      "ref": "F-12",
+      "detail": "随访状态为 complete 但 completed_at 为空"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-13",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-15"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-14",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-16"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-17",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-19"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-19",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-21"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-22",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-24"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-23",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-25"
+    },
+    {
+      "type": "followup_complete_without_date",
+      "ref": "F-24",
+      "detail": "随访状态为 complete 但 completed_at 为空"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-25",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-27"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-26",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-28"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-29",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-04"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-31",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-06"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-34",
+      "detail": "随访状态为 overdue 但 completed_at=2026-03-09"
+    },
+    {
+      "type": "followup_date_without_complete",
+      "ref": "F-35",
+      "detail": "随访状态为 withdrawn 但 completed_at=2026-03-10"
+    }
+  ],
+  "flag_counts": {
+    "followup_complete_without_date": 2,
+    "followup_date_without_complete": 16,
+    "obs_answered_without_value": 3,
+    "obs_out_of_window": 16,
+    "obs_value_without_answered_state": 20
+  },
+  "measures": [
+    {
+      "measure_ref": "M-1",
+      "instrument_ref": "I-1",
+      "version": "1",
+      "construct": "family_confidence",
+      "valid_from": "2025-01-01",
+      "valid_to": "2026-02-01"
+    },
+    {
+      "measure_ref": "M-2",
+      "instrument_ref": "I-1",
+      "version": "2",
+      "construct": "family_confidence",
+      "valid_from": "2026-02-02",
+      "valid_to": null
+    },
+    {
+      "measure_ref": "M-3",
+      "instrument_ref": "I-2",
+      "version": "1",
+      "construct": "course_satisfaction",
+      "valid_from": "2025-01-01",
+      "valid_to": null
+    }
+  ],
+  "services": [
+    {
+      "service_ref": "S-1",
+      "service_type": "group_course",
+      "valid_from": "2025-12-01",
+      "valid_to": "2026-02-01",
+      "description": "家庭沟通课程"
+    },
+    {
+      "service_ref": "S-1",
+      "service_type": "group_course",
+      "valid_from": "2026-02-02",
+      "valid_to": null,
+      "description": "课程修订版"
+    },
+    {
+      "service_ref": "S-2",
+      "service_type": "individual_guidance",
+      "valid_from": "2025-12-01",
+      "valid_to": null,
+      "description": "个别指导"
+    }
+  ]
+}

@@ -5,18 +5,55 @@
 ## 目录
 
 - `data/`：UTF-8 编码、首行为字段名的逗号分隔资料。空字段表示资料未提供，不代表数值为零或业务状态已否定。
-- `tests/`：只检查资料文件可读取和格式结构，不预设分析结果。
+- `analysis/`：可复用的结果分析包（仅标准库，Python 3.11+）。按需求范围 × 参与程度 × 服务分层描述观察到的变化，核算失访分母，标记量表版本差异，并保存每次运行的来源清单。
+- `tests/`：检查资料文件可读取、格式结构，以及分析口径的不变量（分母守恒、缺答不为零、版本标记、补正重跑等）。
+- `output/`：运行产物（报告、结构化结果、清单），不纳入版本管理。
 
 日期使用 ISO 8601 写法；时间字段为空时表示该记录没有提供时间。金额和计数字段以文本保存，具体解释须结合字段名及记录上下文。
 
 ## 运行与检查
 
-需要 Python 3.11 或更高版本，无第三方运行依赖。运行 `python3 -m unittest discover -s tests` 检查合成资料是否可读。
+需要 Python 3.11 或更高版本，无第三方运行依赖。
+
+```bash
+python3 -m unittest discover -s tests   # 检查资料与分析口径
+python3 -m analysis run                 # 运行分析，报告写入 output/runs/<运行编号>/report.md
+python3 -m analysis show latest         # 查看最近一次报告
+python3 -m analysis list                # 列出历史运行
+```
+
+## 分析口径（摘要）
+
+- 可用观测值：`response_state=answered` 且 `value` 可解析为数值；其余记录保留在审计清单，不计入变化。缺答不等于没有改善，也不视为零。
+- 配对：同一家庭、同一构念下取最早与最晚的可用观测，变化 = 随访值 − 基线值。
+- 分母：分层内全部报名家庭；未完成随访者保留在分母并单列去向，不从分母剔除。
+- 量表版本：观测日期须落在量表有效期窗内，否则标记“窗外”；基线与随访使用不同版本标记“跨版本”。
+- 不确定度：均值变化 ±1.96×标准误（正态近似）；配对数 <2 记为“样本不足”。
+- 敏感性边界：对“有基线、缺随访”的家庭，用该构念观测到的最小/最大值推算最佳与最差情形均值；边界不是插补。
+- 结果为观察性关联，不构成因果结论。
+
+完整口径以每次运行报告的第 1 节及 `output/runs/<运行编号>/manifest.json` 为准。
+
+## 常见工作流
+
+**服务记录或量表定义补正后重跑**：修改 `data/` 中相应记录（如调整量表有效期窗），再次
+`python3 -m analysis run --label "补正说明"`，然后
+`python3 -m analysis diff <旧运行编号> <新运行编号>`
+查看哪些既有结论（解读类别、配对户数、版本构成、数据质量标记）因此改变。
+
+**追加新一轮随访**：在 `data/observations.csv` 与 `data/followups.csv` 追加新行后重新
+`run`，再用 `diff` 与上一轮比较。同一家庭多条随访记录按到期日最新的一条计行政状态；
+观测补正通过新行的 `supersedes` 字段指向被取代观测，被取代者退出当前分析但保留在审计清单。
+
+**追查一个比较的来源**：
+`python3 -m analysis trace latest` 列出全部比较键，
+`python3 -m analysis trace latest "S-2|high_need|completed|family_confidence"`
+显示该比较采用的量表定义、服务记录、逐户纳入情况与输入文件哈希。
 
 ## 数据文件
 
-- `data/participants.csv`
-- `data/measures.csv`
-- `data/observations.csv`
-- `data/followups.csv`
-- `data/services.csv`
+- `data/participants.csv`：报名记录（服务、报名日期、转介途径、需求范围、参与程度）。
+- `data/measures.csv`：量表定义（工具、版本、构念、有效期窗）。
+- `data/observations.csv`：观测记录（量表、日期、取值、应答状态、取代关系）。
+- `data/followups.csv`：行政随访记录（到期与完成时间、状态、原因）。
+- `data/services.csv`：服务记录（类型、有效期窗、说明；同一服务可有多条版本记录）。

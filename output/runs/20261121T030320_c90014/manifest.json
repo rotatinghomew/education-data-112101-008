@@ -1,0 +1,15 @@
+{
+  "run_id": "20261121T030320_c90014",
+  "created_at": "2026-11-21T03:03:20+00:00",
+  "label": "基线运行",
+  "data_dir": "data",
+  "input_hashes": {
+    "participants": "2a7aecbcb08671645ac77540a3c47657f8b27a9758cdd64795b6a6e7c1d3ec38",
+    "measures": "1d4e4cf80aeeb4cfdba47c4bd852896d872f41c9d8eeb3c430229452ed22c974",
+    "observations": "a1f0e9bc943cfa8ed33f61329a4fc1c5046d42425254ffd7bca0fc3f53e83cd9",
+    "followups": "b263749226508a8e2a555d17951e3869379bf7c3ce72aa21b8e334fe2244be45",
+    "services": "77b60eb5171618cf90663382a825537ab0feef3e80c04bdd716777a23254f4fb"
+  },
+  "code_hash": "5e2cd1e828830d029f00af23e9c966bbb42b0d2effea6591fc711ac411528df9",
+  "package_version": "0.1.0"
+}
